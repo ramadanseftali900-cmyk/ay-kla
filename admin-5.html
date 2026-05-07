@@ -3483,11 +3483,12 @@ function updateSiparisSeridiSettings() {
     console.log('💾 KAYDET - Hızlı Sipariş Şeridi (Admin-5):');
     console.log('BG Color Value:', bgColor);
     console.log('Text Color Value:', textColor);
+    console.log('Firebase yolu: www_emenkargon_online/admin5/siparisSeridiColors');
     
     // Hızlı sipariş şeridini güncelle
     updateSiparisSeridiDisplay(bgColor, textColor);
     
-    // 🔥 Firebase'e kaydet (ADMIN-2'YE ÖZEL YOL)
+    // 🔥 Firebase'e kaydet (ADMIN-5'E ÖZEL YOL)
     onFirebaseReady(function(db) {
         try {
             var colorData = {
@@ -3496,9 +3497,11 @@ function updateSiparisSeridiSettings() {
                 timestamp: Date.now()
             };
             
-            // Renkleri Firebase'e kaydet - ADMIN-2'YE ÖZEL
+            console.log('🔥 Firebase\'e kaydediliyor...', colorData);
+            
+            // Renkleri Firebase'e kaydet - ADMIN-5'E ÖZEL
             db.ref('www_emenkargon_online/admin5/siparisSeridiColors').set(colorData).then(function() {
-                console.log('🔥 Firebase\'e kaydedildi (admin5/siparisSeridiColors):', colorData);
+                console.log('🔥 ✅ Firebase\'e başarıyla kaydedildi (admin5/siparisSeridiColors):', colorData);
             }).catch(function(error) {
                 console.error('❌ Firebase kayıt hatası:', error);
             });

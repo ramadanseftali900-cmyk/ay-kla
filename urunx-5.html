@@ -2316,39 +2316,45 @@ document.addEventListener('DOMContentLoaded', function() {
     // İlk yükleme
     checkColors();
     
-    // 🔥 FIREBASE ANLIK DİNLEYİCİ - Admin-4'ten gelen renk değişikliklerini dinle
+    // 🔥 FIREBASE ANLIK DİNLEYİCİ - Admin-5'ten gelen renk değişikliklerini dinle
     onFirebaseReady(function(db) {
         try {
-            console.log('🔥 Firebase hazır - Admin-4 renk dinleyicisi başlatılıyor...');
+            console.log('🔥 Firebase hazır - Admin-5 SİPARİŞ ŞERİDİ renk dinleyicisi başlatılıyor...');
+            console.log('🔥 Dinlenecek yol: www_emenkargon_online/admin5/siparisSeridiColors');
             
             // Renk verilerini dinle - ADMIN-5'TEN OKU
             db.ref('www_emenkargon_online/admin5/siparisSeridiColors').on('value', function(snapshot) {
+                console.log('🔥 SİPARİŞ ŞERİDİ - Firebase callback tetiklendi!');
                 var data = snapshot.val();
+                console.log('🔥 SİPARİŞ ŞERİDİ - Gelen data:', data);
+                
                 if (data && data.bgColor && data.textColor) {
-                    console.log('🔥 Firebase\'den renk değişikliği geldi:', data);
+                    console.log('🔥 SİPARİŞ ŞERİDİ - Firebase\'den renk değişikliği geldi:', data);
                     
                     // Hızlı sipariş şeridini anında güncelle
                     if (siparisSeridi && data.bgColor !== lastBgColor) {
                         siparisSeridi.style.background = data.bgColor;
                         lastBgColor = data.bgColor;
-                        console.log('🔥 ANLIK - Arkaplan rengi güncellendi:', data.bgColor);
+                        console.log('🔥 SİPARİŞ ŞERİDİ ANLIK - Arkaplan rengi güncellendi:', data.bgColor);
                     }
                     
                     if (siparisSeridiText && data.textColor !== lastTextColor) {
                         siparisSeridiText.style.color = data.textColor;
                         lastTextColor = data.textColor;
-                        console.log('🔥 ANLIK - Yazı rengi güncellendi:', data.textColor);
+                        console.log('🔥 SİPARİŞ ŞERİDİ ANLIK - Yazı rengi güncellendi:', data.textColor);
                     }
                     
                     // localStorage'a da kaydet (yedek olarak)
                     localStorage.setItem('www_emenkargon_online_admin5_siparis_seridi_bg_color', data.bgColor);
                     localStorage.setItem('www_emenkargon_online_admin5_siparis_seridi_text_color', data.textColor);
+                } else {
+                    console.log('⚠️ SİPARİŞ ŞERİDİ - Firebase\'de veri yok veya eksik:', data);
                 }
             });
             
-            console.log('✅ Firebase renk dinleyicisi aktif!');
+            console.log('✅ SİPARİŞ ŞERİDİ Firebase renk dinleyicisi aktif!');
         } catch(e) {
-            console.error('❌ Firebase dinleyici hatası:', e);
+            console.error('❌ SİPARİŞ ŞERİDİ Firebase dinleyici hatası:', e);
             // Firebase hatası varsa localStorage kontrolüne geri dön
             setInterval(checkColors, 200);
         }
