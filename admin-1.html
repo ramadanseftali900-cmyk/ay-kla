@@ -3211,46 +3211,6 @@ function loadSeoAciklamasi() {
 // HIZLI SİPARİŞ ŞERİDİ YÖNETİMİ
 // =============================================
 
-function updateSiparisSeridiFromColor(type) {
-    if (type === 'bg') {
-        var colorValue = document.getElementById('siparisSeridiBgColor').value;
-        document.getElementById('siparisSeridiBgColorText').value = colorValue;
-    } else if (type === 'text') {
-        var colorValue = document.getElementById('siparisSeridiTextColor').value;
-        document.getElementById('siparisSeridiTextColorText').value = colorValue;
-    }
-    // Renk seçici kullanıldığında otomatik kaydet
-    updateSiparisSeridiSettings();
-}
-
-function updateSiparisSeridiFromText(type) {
-    if (type === 'bg') {
-        var textValue = document.getElementById('siparisSeridiBgColorText').value.trim();
-        // Eğer # ile başlamıyorsa ekle
-        if (textValue && !textValue.startsWith('#')) {
-            textValue = '#' + textValue;
-            document.getElementById('siparisSeridiBgColorText').value = textValue;
-        }
-        if (isValidColor(textValue)) {
-            document.getElementById('siparisSeridiBgColor').value = textValue;
-            // Otomatik kaydet
-            updateSiparisSeridiSettings();
-        }
-    } else if (type === 'text') {
-        var textValue = document.getElementById('siparisSeridiTextColorText').value.trim();
-        // Eğer # ile başlamıyorsa ekle
-        if (textValue && !textValue.startsWith('#')) {
-            textValue = '#' + textValue;
-            document.getElementById('siparisSeridiTextColorText').value = textValue;
-        }
-        if (isValidColor(textValue)) {
-            document.getElementById('siparisSeridiTextColor').value = textValue;
-            // Otomatik kaydet
-            updateSiparisSeridiSettings();
-        }
-    }
-}
-
 function updateSiparisSeridiSettings() {
     var bgColor = document.getElementById('siparisSeridiBgColor').value || '#000000';
     var textColor = document.getElementById('siparisSeridiTextColor').value || '#ffffff';
@@ -3302,6 +3262,46 @@ function updateSiparisSeridiDisplay(bgColor, textColor) {
         siparisSeridiText.style.color = textColor;
         
         console.log('✅ Hızlı sipariş şeridi görünümü güncellendi');
+    }
+}
+
+function updateSiparisSeridiFromColor(type) {
+    if (type === 'bg') {
+        var colorValue = document.getElementById('siparisSeridiBgColor').value;
+        document.getElementById('siparisSeridiBgColorText').value = colorValue;
+    } else if (type === 'text') {
+        var colorValue = document.getElementById('siparisSeridiTextColor').value;
+        document.getElementById('siparisSeridiTextColorText').value = colorValue;
+    }
+    // Renk seçici kullanıldığında otomatik kaydet
+    updateSiparisSeridiSettings();
+}
+
+function updateSiparisSeridiFromText(type) {
+    if (type === 'bg') {
+        var textValue = document.getElementById('siparisSeridiBgColorText').value.trim();
+        // Eğer # ile başlamıyorsa ekle
+        if (textValue && !textValue.startsWith('#')) {
+            textValue = '#' + textValue;
+            document.getElementById('siparisSeridiBgColorText').value = textValue;
+        }
+        if (isValidColor(textValue)) {
+            document.getElementById('siparisSeridiBgColor').value = textValue;
+            // Otomatik kaydet
+            updateSiparisSeridiSettings();
+        }
+    } else if (type === 'text') {
+        var textValue = document.getElementById('siparisSeridiTextColorText').value.trim();
+        // Eğer # ile başlamıyorsa ekle
+        if (textValue && !textValue.startsWith('#')) {
+            textValue = '#' + textValue;
+            document.getElementById('siparisSeridiTextColorText').value = textValue;
+        }
+        if (isValidColor(textValue)) {
+            document.getElementById('siparisSeridiTextColor').value = textValue;
+            // Otomatik kaydet
+            updateSiparisSeridiSettings();
+        }
     }
 }
 
