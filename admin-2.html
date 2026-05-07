@@ -3333,6 +3333,11 @@ function updateAdminBannerDisplay(bgColor, textColor, texts) {
         // Arkaplan rengini güncelle
         bannerStrip.style.background = bgColor;
         
+        // texts yoksa veya boşsa, varsayılan mesaj göster
+        if (!texts || texts.length === 0) {
+            texts = ['Hoş Geldiniz'];
+        }
+        
         // İçeriği oluştur (2 kez tekrarla ki kesintisiz dönsün)
         var htmlContent = '';
         for (var j = 0; j < 2; j++) {
@@ -3428,8 +3433,17 @@ function loadBannerSettings() {
                 }
             }
             
+            // Yazıları topla
+            var texts = [];
+            for (var i = 1; i <= 5; i++) {
+                var input = document.getElementById('bannerText' + i);
+                if (input && input.value.trim()) {
+                    texts.push(input.value.trim());
+                }
+            }
+            
             // Admin paneldeki banner'ı güncelle
-            updateAdminBannerDisplay(bgColor, textColor);
+            updateAdminBannerDisplay(bgColor, textColor, texts);
             
             console.log('✅ Banner ayarları yüklendi');
         }).catch(function(error) {
@@ -3439,12 +3453,19 @@ function loadBannerSettings() {
             var bgColor = localStorage.getItem(getAdminKey('banner_bg_color')) || '#000000';
             var textColor = localStorage.getItem(getAdminKey('banner_text_color')) || '#ffffff';
             
+            // Yazıları topla
+            var texts = [];
+            for (var i = 1; i <= 5; i++) {
+                var savedText = localStorage.getItem(getAdminKey('banner_text_' + i));
+                if (savedText) texts.push(savedText);
+            }
+            
             var bgColorInput = document.getElementById('bannerBgColor');
             var textColorInput = document.getElementById('bannerTextColor');
             if (bgColorInput) bgColorInput.value = bgColor;
             if (textColorInput) textColorInput.value = textColor;
             
-            updateAdminBannerDisplay(bgColor, textColor);
+            updateAdminBannerDisplay(bgColor, textColor, texts);
         });
     });
 }
